@@ -1,0 +1,48 @@
+{% extends "core/base.html" %}
+
+{% block title %}Explore Events | TeamUp{% endblock %}
+
+{% block content %}
+    <section>
+        <h2>Explore Events</h2>
+        <p>Discover your next opportunity to build and learn.</p>
+        <p><strong>Demo:</strong> These are fictional practice events.</p>
+       <form method="get" action="{% url 'events' %}" class="search-form">
+    <label for="event-search">Search events by name</label>
+
+    <input
+        type="search"
+        id="event-search"
+        name="q"
+        value="{{ query }}"
+        placeholder="Try hackathon"
+    >
+
+    <button type="submit">Search</button>
+
+    <a href="{% url 'events' %}">Clear search</a>
+</form>
+      </section>
+
+    {% for event in events %}
+        <section>
+            <h2>
+    <a href="{% url 'event_detail' event.id %}">
+        {{ event.name }}
+    </a>
+</h2>
+            <p><strong>Mode:</strong> {{ event.mode }}</p>
+            <p>{{ event.description }}</p>
+        </section>
+    {% empty %}
+        <section>
+    {% if query %}
+        <h2>No matching events</h2>
+        <p>No events match “{{ query }}”. Try another name.</p>
+    {% else %}
+        <h2>No events yet</h2>
+        <p>Check back soon for new opportunities.</p>
+    {% endif %}
+</section>
+    {% endfor %}
+{% endblock %}

@@ -1,40 +1,23 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-      <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <title>TeamUp | Find Your Team</title>
-  </head>
+{% extends "core/base.html" %}
 
-<body>
-  <header>
-  <h1>TeamUp</h1>
-  <p>Find your people. Build your team. Join the challenge.</p>
-  </header>
- 
-  <main>
-    <section>
+{% block title %}TeamUp | Find Your Team{% endblock %}
+
+{% block content %}
+    <section class="hero">
         <h2>A competition you love. A team you belong to.</h2>
-            <p>
-                Find teammates for hackathons, buildathons,
-                and technology competitions.
-            </p>
+        <p>
+            Find teammates for hackathons, buildathons,
+            and technology competitions.
+        </p>
+        <a href="{% url 'events' %}">Explore events →</a>
     </section>
 
-  <section>
-     <h2>How it works</h2>
-            <ol>
-                <li>Explore a competition you want to join.</li>
-                <li>Find a team or recruit teammates.</li>
-                <li>Prepare together and register with the organiser.</li>
-            </ol>
-  </section>
-
-  </main>
-     <footer>
-        <p>Built for students who want to participate and learn.</p>
-    </footer>
-</body>
-</html>
+    <section>
+        <h2>How it works</h2>
+        <ol>
+            <li>Explore a competition you want to join.</li>
+            <li>Find a team or recruit teammates.</li>
+            <li>Prepare together and register with the organiser.</li>
+        </ol>
+    </section>
+{% endblock %}

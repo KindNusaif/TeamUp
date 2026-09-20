@@ -1,0 +1,17 @@
+# Python environment and generated files
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local database
+db.sqlite3
+db.sqlite3-*
+
+# Private environment configuration
+.env
+.env.*
+!.env.example
+
+# Uploaded files and collected static output
+media/
+staticfiles/
