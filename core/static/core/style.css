@@ -1,0 +1,96 @@
+/* Include padding and borders in an element's total width. */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+    color: #172033;
+    line-height: 1.6;
+}
+
+/* Keep the content centred and readable on different screens. */
+header,
+main,
+footer {
+    width: min(100% - 32px, 1000px);
+    margin-inline: auto;
+}
+
+header {
+    padding-block: 40px 24px;
+}
+
+header h1 {
+    margin: 0;
+    color: #4f46e5;
+    font-size: 32px;
+    letter-spacing: -1px;
+}
+
+header p {
+    margin-top: 8px;
+    color: #526077;
+}
+
+main {
+    display: grid;
+    gap: 24px;
+}
+
+section {
+    padding: 32px;
+    background-color: #ffffff;
+    border: 1px solid #dce2ec;
+    border-radius: 20px;
+}
+
+main section:first-child {
+    padding-block: 56px;
+    background-color: #eef2ff;
+}
+
+h2 {
+    margin-top: 0;
+    line-height: 1.2;
+}
+
+main section:first-child h2 {
+    max-width: 700px;
+    margin-bottom: 20px;
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: -1px;
+}
+
+section p {
+    max-width: 650px;
+    color: #526077;
+}
+
+ol {
+    margin-bottom: 0;
+    padding-left: 24px;
+}
+
+li {
+    padding-block: 8px;
+}
+
+footer {
+    padding-block: 24px;
+    color: #526077;
+    font-size: 14px;
+}
+
+/* Reduce spacing on smaller screens. */
+@media (max-width: 600px) {
+    section {
+        padding: 24px;
+    }
+
+    main section:first-child {
+        padding-block: 36px;
+    }
+}
