@@ -1,22 +1,6 @@
-from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
-
-# Fictional data for learning. We'll use a database later.
-SAMPLE_EVENTS = [
-    {
-        "id": 1,
-        "name": "Campus Hackathon",
-        "mode": "Online",
-        "description": "Build a useful solution to a student problem.",
-    },
-    {
-        "id": 2,
-        "name": "Green Tech Buildathon",
-        "mode": "In person",
-        "description": "Create a technology idea for a greener campus.",
-    },
-]
+from events.models import Event
 
 
 def home(request):
@@ -26,26 +10,30 @@ def home(request):
 def events(request):
     query = request.GET.get("q", "").strip()
 
-    filtered_events = [
-        event
-        for event in SAMPLE_EVENTS
-        if query.casefold() in event["name"].casefold()
-    ]
+    event_list = Event.objects.filter(is_published=True)
+
+    if query:
+        event_list = event_list.filter(name__icontains=query)
 
     return render(
         request,
         "core/events.html",
-        {"events": filtered_events, "query": query},
+        {
+            "events": event_list,
+            "query": query,
+        },
     )
 
 
 def event_detail(request, event_id):
-    for event in SAMPLE_EVENTS:
-        if event["id"] == event_id:
-            return render(
-                request,
-                "core/event_detail.html",
-                {"event": event},
-            )
+    event = get_object_or_404(
+        Event,
+        pk=event_id,
+        is_published=True,
+    )
 
-    raise Http404("Event not found")
+    return render(
+        request,
+        "core/event_detail.html",
+        {"event": event},
+    )
