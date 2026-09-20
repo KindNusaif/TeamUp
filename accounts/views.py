@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.shortcuts import redirect, render
 
@@ -14,6 +15,10 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(
+                request,
+                f"Welcome to TeamUp, {user.username}! Your account has been created."
+            )
             return redirect("home")
     else:
         form = SignUpForm()

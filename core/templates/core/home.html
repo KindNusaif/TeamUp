@@ -3,21 +3,23 @@
 {% block title %}TeamUp | Find Your Team{% endblock %}
 
 {% block content %}
+
     <section class="hero">
-        <h2>A competition you love. A team you belong to.</h2>
+        <h2>A competition you love.<br>A team you belong to.</h2>
         <p>
             Find teammates for hackathons, buildathons,
             and technology competitions.
         </p>
-        <a href="{% url 'events' %}">Explore events →</a>
+        <a href="{% url 'events' %}">Explore events &rarr;</a>
     </section>
 
-    <section>
+    <div class="content-section">
         <h2>How it works</h2>
         <ol>
             <li>Explore a competition you want to join.</li>
             <li>Find a team or recruit teammates.</li>
             <li>Prepare together and register with the organiser.</li>
         </ol>
-    </section>
+    </div>
+
 {% endblock %}

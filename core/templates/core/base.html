@@ -4,28 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TeamUp — Find teammates for hackathons, buildathons, and technology competitions.">
     <title>{% block title %}TeamUp{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
 </head>
 <body>
-    <header>
-        <h1>TeamUp</h1>
-        <p>Find your people. Build your team. Join the challenge.</p>
 
-        <nav aria-label="Main navigation">
-            <a href="{% url 'home' %}">Home</a>
-            <a href="{% url 'events' %}">Explore Events</a>
-        </nav>
+<div class="site-wrapper">
+
+    <!-- ── Header ──────────────────────────────────── -->
+    <header class="site-header">
+        <div class="container">
+            <nav class="nav-inner" aria-label="Main navigation">
+
+                <!-- Brand -->
+                <a href="{% url 'home' %}" class="nav-brand">
+                    <span class="brand-dot"></span>TeamUp
+                </a>
+
+                <!-- Page links -->
+                <div class="nav-links">
+                    <a href="{% url 'home' %}">Home</a>
+                    <a href="{% url 'events' %}">Events</a>
+                </div>
+
+                <!-- Auth links -->
+                <div class="nav-auth">
+                    {% if user.is_authenticated %}
+                        <span class="nav-greeting">Hi, <strong>{{ user.username }}</strong></span>
+                        <a href="{% url 'password_change' %}" class="btn-outline">Change password</a>
+                        <form method="post" action="{% url 'logout' %}" style="margin:0;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-primary">Log out</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn-outline">Log in</a>
+                        <a href="{% url 'signup' %}" class="btn-primary">Sign up</a>
+                    {% endif %}
+                </div>
+
+            </nav>
+        </div>
     </header>
 
+    <!-- ── Flash Messages ──────────────────────────── -->
+    {% if messages %}
+    <div class="container" style="padding-top:16px;">
+        <ul class="messages" role="alert">
+            {% for message in messages %}
+                <li class="message {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- ── Main content ────────────────────────────── -->
     <main>
-        {% block content %}
-        {% endblock %}
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
-    <footer>
-       
-      <p>Built for students who want to participate and learn.</p>
+    <!-- ── Footer ──────────────────────────────────── -->
+    <footer class="site-footer">
+        <p>&copy; {% now "Y" %} TeamUp &mdash; Built for students who want to participate and learn.</p>
     </footer>
+
+</div>
+
 </body>
 </html>
